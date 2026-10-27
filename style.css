@@ -592,11 +592,11 @@ h4 {
 .hero-badge-float {
   position: absolute;
   bottom: 30px;
-  left: 30px;
+  right: 30px;
   display: flex;
   align-items: center;
   gap: 12px;
-  padding: 12px 20px;
+  padding: 8px 12px;
   border: 2px solid var(--pink);
   border-radius: var(--radius-md);
   background-color: var(--white);

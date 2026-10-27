@@ -176,14 +176,10 @@ document.addEventListener('DOMContentLoaded', () => {
   }, { passive: true });
 
   const galleryData = [
-    { src: './assets/gallery-1.jpg', caption: 'Park Playtime Fun with Aarav' },
-    { src: './assets/gallery-2.jpg', caption: 'Beach Vacation Sunny Day' },
-    { src: './assets/gallery-3.jpg', caption: 'Family Picnic & Outdoor Games' },
-    { src: './assets/gallery-4.jpg', caption: 'Dance Practice & Musical Fun' },
-    { src: './assets/gallery-5.jpg', caption: 'Special Birthday Celebration' },
-    { src: './assets/gallery-6.jpg', caption: 'Funny Shorts Shooting Day' },
-    { src: './assets/gallery-7.jpg', caption: 'Exploring Beautiful New Places' },
-    { src: './assets/gallery-8.jpg', caption: 'Daily Smiles & Happy Memories' }
+    { src: './assets/Park-image.png', caption: 'Park Playtime Fun with Aarav' },
+    { src: './assets/90s.png', caption: '90s Shorts & Musical Fun' },
+    { src: './assets/Birthday.png', caption: 'Special Birthday Celebration' },
+    { src: './assets/Funny.png', caption: 'Funny Shorts Shooting Day' },
   ];
 
   let currentGalleryIndex = 0;
