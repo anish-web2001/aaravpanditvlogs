@@ -376,7 +376,7 @@ h4 {
   justify-content: space-between;
   width: 300px;
   height: 100vh;
-  padding: 15px 12px;
+  padding: 40px 34px;
   background-color: var(--white);
   box-shadow: -10px 0 30px rgba(0, 0, 0, 0.15);
   transition: var(--transition-smooth);
