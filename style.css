@@ -413,7 +413,7 @@ h4 {
 .mobile-nav-list {
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 16px;
   /* margin-top: 30px; */
 }
 
@@ -433,9 +433,9 @@ h4 {
   color: var(--primary);
 }
 
-/* .mobile-nav-footer {
+.mobile-nav-footer {
   margin-top: 24px;
-} */
+}
 
 .hero-section {
   position: relative;
