@@ -39,12 +39,12 @@ document.addEventListener('DOMContentLoaded', () => {
       thumbnail: './assets/video-4.png',
       duration: '01:02',
       description: 'Enjoy a cute and energetic kids’ Garba dance performance this Navratri! ❤️🌸',
-      url: 'https://youtu.be/KuA-wnoPOkY?si=iO_3CcNJ8KdlsOH2'
+      url: 'https://youtu.be/DCopfhUz_J0?si=wkyh5YV0xOeklQzd'
     },
     {
       id: 'v5',
       title: "Main Barsane Ki Chhori | Kid's Dance Performance | Aarav Pandit Vlogs",
-      category: 'Funny Shorts',
+      category: 'Dance',
       thumbnail: './assets/video-5.png',
       duration: '03:59',
       description: "Enjoy Aarav's cute dance performance on 'Main Barsane Ki Chhori'! 💃😍",
@@ -53,7 +53,7 @@ document.addEventListener('DOMContentLoaded', () => {
     {
       id: 'v6',
       title: "हम छोटे छोटे बच्चे हैं | Hum Chote Chote Bache hain | Kids Dance Performance Video | Nursery Rhymes",
-      category: 'Travel',
+      category: 'Dance',
       thumbnail: './assets/video-6.png',
       duration: '01:44',
       description: "Celebrate 15 August with a cute kids dance performance full of joy and patriotism! 🇮🇳🎉❤️",

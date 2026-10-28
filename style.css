@@ -415,7 +415,20 @@ h4 {
   flex-direction: column;
   gap: 16px;
   margin-top: 30px;
-  height: min-content;
+
+  /* Mobile scrolling fix */
+  max-height: calc(100vh - 150px);
+  max-height: calc(100dvh - 150px);
+  overflow-y: auto;
+  overflow-x: hidden;
+
+  /* Smooth touch scrolling */
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior-y: contain;
+
+  /* Space at the bottom */
+  padding-bottom: 20px;
+  box-sizing: border-box;
 }
 
 .mobile-nav-link {
@@ -653,10 +666,12 @@ h4 {
 }
 
 @keyframes float {
+
   0%,
   100% {
     transform: translateY(0) rotate(0deg);
   }
+
   50% {
     transform: translateY(-12px) rotate(4deg);
   }
@@ -1510,6 +1525,7 @@ h4 {
 }
 
 @media (max-width: 760px) {
+
   .hero-container,
   .about-container {
     grid-template-columns: 1fr;
@@ -1543,6 +1559,25 @@ h4 {
 
   .header-actions .btn-youtube-header {
     display: none;
+  }
+
+  /* Center About CTA button on mobile */
+  @media screen and (max-width: 768px) {
+    .about-cta {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 100%;
+      text-align: center;
+    }
+
+    .about-cta .btn {
+      display: inline-flex;
+      justify-content: center;
+      align-items: center;
+      max-width: 100%;
+      box-sizing: border-box;
+    }
   }
 }
 
