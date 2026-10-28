@@ -414,21 +414,7 @@ h4 {
   display: flex;
   flex-direction: column;
   gap: 16px;
-  margin-top: 30px;
-
-  /* Mobile scrolling fix */
-  max-height: calc(100vh - 150px);
-  max-height: calc(100dvh - 150px);
-  overflow-y: auto;
-  overflow-x: hidden;
-
-  /* Smooth touch scrolling */
-  -webkit-overflow-scrolling: touch;
-  overscroll-behavior-y: contain;
-
-  /* Space at the bottom */
-  padding-bottom: 20px;
-  box-sizing: border-box;
+  /* margin-top: 30px; */
 }
 
 .mobile-nav-link {
