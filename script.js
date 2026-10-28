@@ -18,7 +18,7 @@ document.addEventListener('DOMContentLoaded', () => {
       id: 'v2',
       title: "Aarav's Sundar nursery vlogs Adventure & Scenic Views",
       category: 'Travel',
-      thumbnail: './assets/video-2.jpg',
+      thumbnail: './assets/video-2.png',
       duration: '1:14',
       description: 'A trip to the beautiful park! Aarav experiences fun😎, scenic spots',
       url: 'https://www.youtube.com/watch?v=bx56Ud_OT7A'
