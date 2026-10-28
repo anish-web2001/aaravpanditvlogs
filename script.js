@@ -25,39 +25,39 @@ document.addEventListener('DOMContentLoaded', () => {
     },
     {
       id: 'v3',
-      title: 'Everyday Fun & Creative Playtime at Home',
-      category: 'Daily Life',
-      thumbnail: './assets/video-3.jpg',
-      duration: '08:15',
-      description: 'A happy day filled with imaginative games, painting, and unboxing new educational toys with Aarav!',
-      url: 'https://www.youtube.com/@aaravpanditvlogs'
+      title: 'The Vvan Movie Dekhne Chale | Movie Time 🎬🍿 | Family Vlog - Aarav Pandit Vlogs 💖',
+      category: 'Movie Time',
+      thumbnail: './assets/video-3.png',
+      duration: '04:02',
+      description: 'Enjoy a fun family day watching The Vvan movie with Aarav! 🎬🍿',
+      url: 'https://youtu.be/3JoR4pNuG7s?si=7ncWQ02tDqYySOnN'
     },
     {
       id: 'v4',
-      title: "Aarav's Cool Dance Steps & Energetic Performance",
+      title: "Kids Garba Dance Performance 💃😍 Navratri Special 2026 | Aarav Pandit Vlogs",
       category: 'Dance',
-      thumbnail: './assets/video-4.jpg',
-      duration: '06:50',
-      description: 'Watch 5-year-old Aarav show off his super energetic dance moves to popular catchy tunes!',
-      url: 'https://www.youtube.com/@aaravpanditvlogs'
+      thumbnail: './assets/video-4.png',
+      duration: '01:02',
+      description: 'Enjoy a cute and energetic kids’ Garba dance performance this Navratri! ❤️🌸',
+      url: 'https://youtu.be/KuA-wnoPOkY?si=iO_3CcNJ8KdlsOH2'
     },
     {
       id: 'v5',
-      title: 'Super Funny Moments & Unstoppable Laughs',
+      title: "Main Barsane Ki Chhori | Kid's Dance Performance | Aarav Pandit Vlogs",
       category: 'Funny Shorts',
-      thumbnail: './assets/video-5.jpg',
-      duration: '03:30',
-      description: 'A hilarious collection of cute bloopers, silly jokes, and non-stop giggles from Aarav.',
-      url: 'https://www.youtube.com/@aaravpanditvlogs'
+      thumbnail: './assets/video-5.png',
+      duration: '03:59',
+      description: "Enjoy Aarav's cute dance performance on 'Main Barsane Ki Chhori'! 💃😍",
+      url: 'https://youtu.be/vtsuTfuTIRE?si=1ciCMRDUN7H94S2C'
     },
     {
       id: 'v6',
-      title: 'Family Beach Picnic & Water Fun Day',
+      title: "हम छोटे छोटे बच्चे हैं | Hum Chote Chote Bache hain | Kids Dance Performance Video | Nursery Rhymes",
       category: 'Travel',
-      thumbnail: './assets/video-6.jpg',
-      duration: '11:05',
-      description: 'Building sandcastles and splashing in waves! Aarav enjoys a sunny family outing by the sea.',
-      url: 'https://www.youtube.com/@aaravpanditvlogs'
+      thumbnail: './assets/video-6.png',
+      duration: '01:44',
+      description: "Celebrate 15 August with a cute kids dance performance full of joy and patriotism! 🇮🇳🎉❤️",
+      url: 'https://youtu.be/cEH0kReWe0w?si=5zyYkikMHdRFFMZA'
     }
   ];
 
@@ -71,40 +71,113 @@ document.addEventListener('DOMContentLoaded', () => {
     }[match]));
   }
 
+  function getYouTubeVideoId(url) {
+    try {
+      const parsed = new URL(url);
+      if (parsed.hostname.includes('youtu.be')) return parsed.pathname.slice(1);
+      if (parsed.pathname === '/watch') return parsed.searchParams.get('v');
+      const parts = parsed.pathname.split('/').filter(Boolean);
+      if (['embed', 'shorts', 'live'].includes(parts[0])) return parts[1] || null;
+    } catch (_) { }
+    return null;
+  }
+
+  function ensureVideoModal() {
+    if (document.getElementById('video-modal')) return;
+    const modal = document.createElement('div');
+    modal.id = 'video-modal';
+    modal.className = 'video-modal';
+    modal.setAttribute('role', 'dialog');
+    modal.setAttribute('aria-modal', 'true');
+    modal.setAttribute('aria-hidden', 'true');
+    modal.setAttribute('aria-label', 'Video player');
+    modal.innerHTML = `
+      <div class="video-modal-backdrop" data-video-close></div>
+      <div class="video-modal-panel">
+        <button type="button" class="video-modal-close" aria-label="Close video" data-video-close>&times;</button>
+        <div class="video-modal-frame-wrap">
+          <iframe id="video-modal-iframe" title="YouTube video player"
+            src="" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+        </div>
+        <p class="video-modal-note" id="video-modal-note">Video plays here on the website.</p>
+      </div>`;
+    document.body.appendChild(modal);
+
+    const closeModal = () => {
+      modal.classList.remove('active');
+      modal.setAttribute('aria-hidden', 'true');
+      document.getElementById('video-modal-iframe').src = '';
+      document.body.style.overflow = '';
+    };
+    modal.querySelectorAll('[data-video-close]').forEach(el => el.addEventListener('click', closeModal));
+    document.addEventListener('keydown', e => {
+      if (e.key === 'Escape' && modal.classList.contains('active')) closeModal();
+    });
+    modal._openVideo = (video, videoId) => {
+      const iframe = document.getElementById('video-modal-iframe');
+      const note = document.getElementById('video-modal-note');
+      if (!videoId) {
+        note.textContent = 'Is video ke liye abhi YouTube video link add nahi kiya gaya hai.';
+        iframe.src = '';
+        iframe.style.display = 'none';
+      } else {
+        note.textContent = video.title;
+        iframe.style.display = 'block';
+        iframe.src = `https://www.youtube-nocookie.com/embed/${encodeURIComponent(videoId)}?autoplay=1&rel=0&playsinline=1`;
+      }
+      modal.classList.add('active');
+      modal.setAttribute('aria-hidden', 'false');
+      document.body.style.overflow = 'hidden';
+      const closeBtn = modal.querySelector('.video-modal-close');
+      if (closeBtn) closeBtn.focus();
+    };
+  }
+
   function renderFeaturedVideos() {
     const videoGrid = document.getElementById('video-grid');
     if (!videoGrid) return;
+    ensureVideoModal();
 
     videoGrid.innerHTML = videosData.map(video => `
       <article class="video-card">
         <div class="video-thumbnail-wrapper">
           <img src="${video.thumbnail}" alt="${escapeHtml(video.title)}" class="video-thumb" loading="lazy" width="1280" height="720">
           <div class="video-play-overlay">
-            <a href="${video.url}" target="_blank" rel="noopener noreferrer" class="play-btn-circle" aria-label="Play ${escapeHtml(video.title)} on YouTube">
-              <svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor">
+            <button type="button" class="play-btn-circle js-play-video" data-video-id="${escapeHtml(getYouTubeVideoId(video.url) || '')}" data-video-key="${escapeHtml(video.id)}" aria-label="Play ${escapeHtml(video.title)}">
+              <svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor" aria-hidden="true">
                 <path d="M8 5v14l11-7z" />
               </svg>
-            </a>
+            </button>
           </div>
           <span class="video-category-badge">${escapeHtml(video.category)}</span>
-          <span class="video-duration-badge">${video.duration}</span>
+          <span class="video-duration-badge">${escapeHtml(video.duration)}</span>
         </div>
         <div class="video-content">
           <h3 class="video-card-title">${escapeHtml(video.title)}</h3>
           <p class="video-card-desc">${escapeHtml(video.description)}</p>
           <div class="video-card-footer">
-            <a href="${video.url}" target="_blank" rel="noopener noreferrer" class="btn-video-watch">
-              <svg viewBox="0 0 24 24" width="18" height="18" fill="#ff1f3d">
+            <button type="button" class="btn-video-watch js-play-video" data-video-id="${escapeHtml(getYouTubeVideoId(video.url) || '')}" data-video-key="${escapeHtml(video.id)}">
+              <svg viewBox="0 0 24 24" width="18" height="18" fill="#ff1f3d" aria-hidden="true">
                 <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z" />
               </svg>
               <span>Watch Video</span>
-            </a>
+            </button>
           </div>
         </div>
       </article>
     `).join('');
-  }
 
+    videoGrid.querySelectorAll('.js-play-video').forEach(button => {
+      button.addEventListener('click', () => {
+        const video = videosData.find(item => item.id === button.dataset.videoKey);
+        const modal = document.getElementById('video-modal');
+        if (video && modal && modal._openVideo) {
+          modal._openVideo(video, button.dataset.videoId);
+        }
+      });
+    });
+  }
   renderFeaturedVideos();
 
   const menuToggle = document.getElementById('menu-toggle');
