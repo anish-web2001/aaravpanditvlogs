@@ -353,17 +353,28 @@ h4 {
   position: fixed;
   inset: 0;
   z-index: 1050;
-  background-color: rgba(21, 21, 21, 0.5);
+
+  /* Background overlay */
+  background-color: rgba(21, 21, 21, 0.55);
   -webkit-backdrop-filter: blur(4px);
   backdrop-filter: blur(4px);
+
+  /* Hidden by default */
   opacity: 0;
   visibility: hidden;
-  transition: var(--transition-smooth);
+  pointer-events: none;
+
+  /* Smooth animation */
+  transition:
+    opacity 0.3s ease,
+    visibility 0.3s ease;
 }
 
+/* Show backdrop when mobile menu is open */
 .mobile-nav-backdrop.active {
   opacity: 1;
   visibility: visible;
+  pointer-events: auto;
 }
 
 .mobile-nav {
@@ -414,7 +425,7 @@ h4 {
   display: flex;
   flex-direction: column;
   gap: 16px;
-  margin-top: 30px;
+  margin-top: 10px;
 
   /* Mobile scrolling fix */
   max-height: calc(100vh - 150px);
@@ -427,7 +438,7 @@ h4 {
   overscroll-behavior-y: contain;
 
   /* Space at the bottom */
-  padding-bottom: 20px;
+  padding-bottom: 10px;
   box-sizing: border-box;
 }
 
