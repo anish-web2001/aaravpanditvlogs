@@ -375,7 +375,7 @@ h4 {
   flex-direction: column;
   justify-content: space-between;
   width: 300px;
-  height: 100vh;
+  height: 95vh;
   padding: 40px 34px;
   background-color: var(--white);
   box-shadow: -10px 0 30px rgba(0, 0, 0, 0.15);
